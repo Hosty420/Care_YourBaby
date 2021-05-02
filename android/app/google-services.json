@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "92755425017",
+    "project_id": "careyourbaby-7e4a1",
+    "storage_bucket": "careyourbaby-7e4a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:92755425017:android:1f7e7bcded9c7eefe55428",
+        "android_client_info": {
+          "package_name": "com.example.care_yourbaby"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "92755425017-k6m07g733ckobgat0uppscff90frd66p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIBjxzsyPq4FquFCOPhUy6a1Rg6GDIcLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "92755425017-k6m07g733ckobgat0uppscff90frd66p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
