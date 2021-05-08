@@ -1,6 +1,8 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:care_yourbaby/Util/Utilities.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 const _kPages = <String, IconData>{
   'Preguntas': Icons.question_answer,
@@ -19,6 +21,10 @@ class ConvexAppExample extends StatefulWidget {
 
 class _ConvexAppExampleState extends State<ConvexAppExample> {
   TabStyle _tabStyle = TabStyle.reactCircle;
+  var _nombre = "";
+  var _pregunta = "";
+  final _keyForm = GlobalKey<FormState>();
+  Utilities util = new Utilities();
 
   @override
   Widget build(BuildContext context) {
@@ -421,49 +427,82 @@ class _ConvexAppExampleState extends State<ConvexAppExample> {
 
   Widget _buildBottomSheet(BuildContext context) {
     return Container(
-      height: 300,
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.purple.shade400, width: 2.0),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: ListView(
-        children: <Widget>[
-          const ListTile(title: Text('Registra tu pregunta')),
-          TextField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              icon: Icon(Icons.person),
-              labelText: 'Ingresa tu nombre (Opcional)',
-            ),
+        height: 300,
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.purple.shade400, width: 2.0),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Form(
+          key: _keyForm,
+          child: ListView(
+            children: <Widget>[
+              const ListTile(title: Text('Registra tu pregunta')),
+              TextField(
+                  controller: TextEditingController(text: _nombre.toString()),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.person),
+                    labelText: 'Ingresa tu nombre (Opcional)',
+                  ),
+                  onChanged: (String valor) async {
+                    _nombre = valor;
+                  }),
+              SizedBox(height: 10.0),
+              TextFormField(
+                  controller: TextEditingController(text: _pregunta.toString()),
+                  validator: (value) {
+                    if (value.isEmpty || null == value) {
+                      return 'El campo no debe estar vacio.';
+                    }
+                  },
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.pregnant_woman_rounded),
+                    labelText: 'Ingresa tu duda',
+                  ),
+                  onChanged: (String valor) async {
+                    _pregunta = valor;
+                  }),
+              SizedBox(height: 10.0),
+              Container(
+                alignment: Alignment.center,
+                child: TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.resolveWith(getColor),
+                  ),
+                  onPressed: () {
+                    if (_keyForm.currentState.validate()) {
+                      util.showWindowDialog(context,
+                          titulo: "Datos Ingresados",
+                          mensaje: "Nombre : $_nombre \nPregunta: $_pregunta",
+                          boton: "Ok");
+                      _addQuestion();
+                    }
+                  },
+                  child: Text(
+                    '   Guardar  ',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              )
+            ],
           ),
-          SizedBox(height: 10.0),
-          TextField(
-            keyboardType: TextInputType.text,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              icon: Icon(Icons.pregnant_woman_rounded),
-              labelText: 'Ingresa tu duda',
-            ),
-          ),
-          SizedBox(height: 10.0),
-          Container(
-            alignment: Alignment.center,
-            child: TextButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith(getColor),
-              ),
-              onPressed: () {},
-              child: Text(
-                '   Guardar  ',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+        ));
+  }
+
+  Future<void> _addQuestion() {
+    CollectionReference collection =
+        FirebaseFirestore.instance.collection('Question');
+    return collection
+        .add({'nombre': this._nombre, 'pregunta': this._pregunta})
+        .then((value) => util.showToast(context,
+            mensaje: 'Datos adicionados con éxito', boton: 'Ok'))
+        .catchError((error) =>
+            util.showToast(context, mensaje: 'Error: $error', boton: 'Ok'));
   }
 
   Color getColor(Set<MaterialState> states) {
