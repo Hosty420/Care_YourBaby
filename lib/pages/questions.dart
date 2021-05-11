@@ -1,90 +1,25 @@
-import 'package:url_launcher/url_launcher.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:care_yourbaby/Util/Utilities.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-const _kPages = <String, IconData>{
-  'Preguntas': Icons.question_answer,
-  'Ejercicio': Icons.sports_volleyball,
-  'Nutrición': Icons.food_bank_rounded,
-  'Tú': Icons.pregnant_woman_sharp,
-  'Agenda': Icons.calendar_today_sharp
-};
-
-class ConvexAppExample extends StatefulWidget {
-  const ConvexAppExample({Key key}) : super(key: key);
-
+class Questions extends StatefulWidget {
   @override
-  _ConvexAppExampleState createState() => _ConvexAppExampleState();
+  State<StatefulWidget> createState() => ManageQuestions();
 }
 
-class _ConvexAppExampleState extends State<ConvexAppExample> {
-  TabStyle _tabStyle = TabStyle.reactCircle;
+class ManageQuestions extends State<Questions> {
+  Utilities util = new Utilities();
   var _nombre = "";
   var _pregunta = "";
-  final _keyForm = GlobalKey<FormState>();
-  Utilities util = new Utilities();
-
-  @override
-  Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 6,
-      initialIndex: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[],
-          leading: IconButton(
-            tooltip: 'Search',
-            icon: Icon(Icons.question_answer),
-            onPressed: () => showModalBottomSheet(
-                context: context, builder: (ctx) => _buildBottomSheet(ctx)),
-          ),
-          automaticallyImplyLeading: false,
-          //iconTheme: Icons.question_answer_outlined,
-          title: const Text('PREGUNTAS FRECUENTES'),
-          backgroundColor: Color.fromRGBO(151, 84, 247, 1),
-        ),
-        body: SingleChildScrollView(child: _body()),
-        bottomNavigationBar: _menu(),
-      ),
-    );
-  }
-
-  Widget _body() {
-    return Column(
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        _pregunta1(),
-        _pregunta2(),
-        _pregunta3(),
-        _pregunta4(),
-        _pregunta5(),
-        SizedBox(
-          height: 20.0,
-        )
-      ],
-    );
-  }
-
-  Widget _menu() {
-    return ConvexAppBar(
-      style: _tabStyle,
-      color: Colors.white,
-      backgroundColor: Colors.black,
-      items: <TabItem>[
-        for (final entry in _kPages.entries)
-          TabItem(icon: entry.value, title: entry.key),
-      ],
-    );
-  }
-
   List<bool> _isExpanded1 = List.generate(1, (_) => false);
   List<bool> _isExpanded2 = List.generate(1, (_) => false);
   List<bool> _isExpanded3 = List.generate(1, (_) => false);
   List<bool> _isExpanded4 = List.generate(1, (_) => false);
   List<bool> _isExpanded5 = List.generate(1, (_) => false);
-
+  final _keyForm = GlobalKey<FormState>();
+  final String reference =
+      "https://psicologiaymente.com/desarrollo/consejos-ser-buena-madre";
   final String response1 =
       'Ayudar a los hijos a seguir sus sueños y proporcionarle el estímulo suficiente es importante.'
       ' Esto comienza con la comprensión de que tu hijo puede pensar diferente a ti y le permites tomar'
@@ -127,8 +62,135 @@ class _ConvexAppExampleState extends State<ConvexAppExample> {
       'cuando las abone. Pero debe saber que en la Seguridad Social y en las entidades privadas solo le '
       'realizarán tres si todo va bien.';
 
-  final String reference =
-      "https://psicologiaymente.com/desarrollo/consejos-ser-buena-madre";
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 6,
+      initialIndex: 2,
+      child: Scaffold(
+          appBar: AppBar(
+            actions: <Widget>[],
+            leading: IconButton(
+              tooltip: 'Search',
+              icon: Icon(Icons.question_answer),
+              onPressed: () => showModalBottomSheet(
+                  context: context, builder: (ctx) => _buildBottomSheet(ctx)),
+            ),
+            automaticallyImplyLeading: false,
+            //iconTheme: Icons.question_answer_outlined,
+            title: const Text('PREGUNTAS FRECUENTES'),
+            backgroundColor: Color.fromRGBO(151, 84, 247, 1),
+          ),
+          body: SingleChildScrollView(child: _body())),
+    );
+  }
+
+  Widget _body() {
+    return Column(
+      children: <Widget>[
+        _pregunta1(),
+        _pregunta2(),
+        _pregunta3(),
+        _pregunta4(),
+        _pregunta5(),
+        SizedBox(
+          height: 20.0,
+        )
+      ],
+    );
+  }
+
+  Widget _buildBottomSheet(BuildContext context) {
+    return Container(
+        height: 300,
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.purple.shade400, width: 2.0),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Form(
+          key: _keyForm,
+          child: ListView(
+            children: <Widget>[
+              const ListTile(title: Text('Registra tu pregunta')),
+              TextField(
+                  controller: TextEditingController(text: _nombre.toString()),
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.person),
+                    labelText: 'Ingresa tu nombre (Opcional)',
+                  ),
+                  onChanged: (String valor) async {
+                    _nombre = valor;
+                  }),
+              SizedBox(height: 10.0),
+              TextFormField(
+                  controller: TextEditingController(text: _pregunta.toString()),
+                  validator: (value) {
+                    if (value.isEmpty || null == value) {
+                      return 'El campo no debe estar vacio.';
+                    }
+                  },
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    icon: Icon(Icons.pregnant_woman_rounded),
+                    labelText: 'Ingresa tu duda',
+                  ),
+                  onChanged: (String valor) async {
+                    _pregunta = valor;
+                  }),
+              SizedBox(height: 10.0),
+              Container(
+                alignment: Alignment.center,
+                child: TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.resolveWith(getColor),
+                  ),
+                  onPressed: () {
+                    if (_keyForm.currentState.validate()) {
+                      util.showWindowDialog(context,
+                          titulo: "Datos Ingresados",
+                          mensaje: "Nombre : $_nombre \nPregunta: $_pregunta",
+                          boton: "Ok");
+                      _addQuestion();
+                    }
+                  },
+                  child: Text(
+                    '   Guardar  ',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
+  }
+
+  Future<void> _addQuestion() {
+    CollectionReference collection =
+        FirebaseFirestore.instance.collection('Question');
+    return collection
+        .add({'nombre': this._nombre, 'pregunta': this._pregunta})
+        .then((value) => util.showToast(context,
+            mensaje: 'Datos adicionados con éxito', boton: 'Ok'))
+        .catchError((error) =>
+            util.showToast(context, mensaje: 'Error: $error', boton: 'Ok'));
+  }
+
+  Color getColor(Set<MaterialState> states) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+    if (states.any(interactiveStates.contains)) {
+      return Colors.purple.shade400;
+    }
+    return Color.fromRGBO(151, 84, 247, 1);
+  }
 
   Widget _pregunta1() {
     return SingleChildScrollView(
@@ -423,97 +485,5 @@ class _ConvexAppExampleState extends State<ConvexAppExample> {
             )),
       ),
     );
-  }
-
-  Widget _buildBottomSheet(BuildContext context) {
-    return Container(
-        height: 300,
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.purple.shade400, width: 2.0),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: Form(
-          key: _keyForm,
-          child: ListView(
-            children: <Widget>[
-              const ListTile(title: Text('Registra tu pregunta')),
-              TextField(
-                  controller: TextEditingController(text: _nombre.toString()),
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.person),
-                    labelText: 'Ingresa tu nombre (Opcional)',
-                  ),
-                  onChanged: (String valor) async {
-                    _nombre = valor;
-                  }),
-              SizedBox(height: 10.0),
-              TextFormField(
-                  controller: TextEditingController(text: _pregunta.toString()),
-                  validator: (value) {
-                    if (value.isEmpty || null == value) {
-                      return 'El campo no debe estar vacio.';
-                    }
-                  },
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.pregnant_woman_rounded),
-                    labelText: 'Ingresa tu duda',
-                  ),
-                  onChanged: (String valor) async {
-                    _pregunta = valor;
-                  }),
-              SizedBox(height: 10.0),
-              Container(
-                alignment: Alignment.center,
-                child: TextButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.resolveWith(getColor),
-                  ),
-                  onPressed: () {
-                    if (_keyForm.currentState.validate()) {
-                      util.showWindowDialog(context,
-                          titulo: "Datos Ingresados",
-                          mensaje: "Nombre : $_nombre \nPregunta: $_pregunta",
-                          boton: "Ok");
-                      _addQuestion();
-                    }
-                  },
-                  child: Text(
-                    '   Guardar  ',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ));
-  }
-
-  Future<void> _addQuestion() {
-    CollectionReference collection =
-        FirebaseFirestore.instance.collection('Question');
-    return collection
-        .add({'nombre': this._nombre, 'pregunta': this._pregunta})
-        .then((value) => util.showToast(context,
-            mensaje: 'Datos adicionados con éxito', boton: 'Ok'))
-        .catchError((error) =>
-            util.showToast(context, mensaje: 'Error: $error', boton: 'Ok'));
-  }
-
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.purple.shade400;
-    }
-    return Color.fromRGBO(151, 84, 247, 1);
   }
 }
