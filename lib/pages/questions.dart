@@ -152,8 +152,10 @@ class ManageQuestions extends State<Questions> {
                   onPressed: () {
                     if (_keyForm.currentState.validate()) {
                       util.showWindowDialog(context,
-                          titulo: "Datos Ingresados",
-                          mensaje: "Nombre : $_nombre \nPregunta: $_pregunta",
+                          titulo: "Tu pregunta fue registrada exitosamente",
+                          mensaje: 'Prontamente nuestros '
+                              'profesionales darán respuesta a tu inquietud por este medio, puedes buscarla en la '
+                              'sesión de preguntas frecuentes',
                           boton: "Ok");
                       _addQuestion();
                     }

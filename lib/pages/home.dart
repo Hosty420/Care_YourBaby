@@ -21,9 +21,6 @@ class _ConvexAppExampleState extends State<ConvexAppExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text("CARE YOUR BABY"),
-          backgroundColor: Color.fromRGBO(151, 84, 247, 1)),
       body: _pageOption[selectedPage],
       bottomNavigationBar: ConvexAppBar(
         style: _tabStyle,
