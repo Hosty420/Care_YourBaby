@@ -158,6 +158,7 @@ class ManageQuestions extends State<Questions> {
                               'sesión de preguntas frecuentes',
                           boton: "Ok");
                       _addQuestion();
+                      _cleanQuestion();
                     }
                   },
                   child: Text(
@@ -180,6 +181,11 @@ class ManageQuestions extends State<Questions> {
             mensaje: 'Datos adicionados con éxito', boton: 'Ok'))
         .catchError((error) =>
             util.showToast(context, mensaje: 'Error: $error', boton: 'Ok'));
+  }
+
+  void _cleanQuestion() {
+    this._nombre = '';
+    this._pregunta = '';
   }
 
   Color getColor(Set<MaterialState> states) {
