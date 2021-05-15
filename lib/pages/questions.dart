@@ -230,7 +230,8 @@ class ManageQuestions extends State<Questions> {
                           onTap: () => launch(
                               'https://www.etapainfantil.com/ser-buena-madre'),
                           child: Text(
-                            'https://www.etapainfantil.com/ser-buena-madre',
+                            'Roldán, M. (15 de febrero de 2021). ¿Qué te hace ser una buena'
+                            ' madre? https://www.etapainfantil.com/ser-buena-madre',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.blue,
@@ -289,6 +290,7 @@ class ManageQuestions extends State<Questions> {
                           onTap: () => launch(
                               'https://kidshealth.org/es/parents/preg-health-esp.html'),
                           child: Text(
+                            'Pearl, B. (Junio de 2018). Cuidado de la salud durante el embarazo. '
                             'https://kidshealth.org/es/parents/preg-health-esp.html',
                             textAlign: TextAlign.left,
                             style: TextStyle(
@@ -348,7 +350,7 @@ class ManageQuestions extends State<Questions> {
                           onTap: () => launch(
                               'https://www.pampers.com.ar/embarazo/embarazo-saludable/art%C3%ADculo/que-es-preeclampsia-y-como-prevenirla'),
                           child: Text(
-                            'https://www.pampers.com.ar/embarazo/embarazo-saludable/art%C3%ADculo/que-es-preeclampsia-y-como-prevenirla',
+                            'Pampers. (13 de mayo de 2021). ¿Qué es la Preeclampsia y Cómo Prevenirla? https://www.pampers.com.ar/embarazo/embarazo-saludable/art%C3%ADculo/que-es-preeclampsia-y-como-prevenirla',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.blue,
@@ -407,7 +409,7 @@ class ManageQuestions extends State<Questions> {
                           onTap: () => launch(
                               'https://www.guiainfantil.com/blog/132/estoy-embarazada-puedo-tenir-mi-pelo.html#:~:text=Aunque%20muchos%20m%C3%A9dicos%20recomiendan%20cautela,tintes%20puedan%20da%C3%B1ar%20al%20feto.'),
                           child: Text(
-                            'https://www.guiainfantil.com/blog/132/estoy-embarazada-puedo-tenir-mi-pelo.html',
+                            'Medina, V. (20 de junio de 2016). Estoy embarazada. ¿Puedo teñir mi pelo? https://www.guiainfantil.com/blog/132/estoy-embarazada-puedo-tenir-mi-pelo.html',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.blue,
@@ -464,9 +466,9 @@ class ManageQuestions extends State<Questions> {
                       ),
                       subtitle: InkWell(
                           onTap: () => launch(
-                              'https://www.natalben.com/embarazo-pruebas-y-ecografias/ecografias-son-seguras-cuantas-puedo-hacerme#:~:text=%C2%BFPueden%20realizarse%20cada%20trimestre%20de,de%20embarazo)%20buscando%20la%20eficiencia.'),
+                              'https://inatal.org/noticias/blog-del-editor/498-cual-es-el-numero-minimo-de-ecografias-que-deben-hacerse-en-un-embarazo.html'),
                           child: Text(
-                            'https://www.natalben.com/embarazo-pruebas-y-ecografias/ecografias-son-seguras',
+                            'Gratacós, E. (01 Febrero 2015). ¿Cuál es el número mínimo de ecografías que deben hacerse en un embarazo? https://inatal.org/noticias/blog-del-editor/498-cual-es-el-numero-minimo-de-ecografias-que-deben-hacerse-en-un-embarazo.html',
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.blue,
