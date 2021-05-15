@@ -1,4 +1,5 @@
 import 'package:care_yourbaby/pages/correctExercises.dart';
+import 'package:care_yourbaby/pages/incorrectExercises.dart';
 import 'package:care_yourbaby/pages/questions.dart';
 import 'package:flutter/material.dart';
 
@@ -143,7 +144,10 @@ class ManageTraining extends State<Training> {
           ),
           ButtonBar(alignment: MainAxisAlignment.end, children: <Widget>[
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => InappropiateE()));
+              },
               child: const Text('VER MÁS'),
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.resolveWith(getColor),
