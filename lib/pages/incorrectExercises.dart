@@ -16,8 +16,8 @@ class InappropiateExercise extends State<InappropiateE> {
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
+    _videoController = VideoPlayerController.asset(
+        'assets/EjerciciosNoRecomenDableDuranteEmbarazo.mp4')
       // **When the controllers change, call setState() to rebuild widget.**
       ..addListener(() => setState(() {}))
       ..setLooping(true)
