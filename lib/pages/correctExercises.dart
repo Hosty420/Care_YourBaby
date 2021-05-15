@@ -16,14 +16,14 @@ class AppropiateExercise extends State<AppropiateE> {
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4')
-      // **When the controllers change, call setState() to rebuild widget.**
-      ..addListener(() => setState(() {}))
-      ..setLooping(true)
-      ..initialize();
-    _specialistVideo = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
+    _videoController =
+        VideoPlayerController.asset('assets/videoEjerciciosGluteosPiernas.mp4')
+          // **When the controllers change, call setState() to rebuild widget.**
+          ..addListener(() => setState(() {}))
+          ..setLooping(true)
+          ..initialize();
+    _specialistVideo = VideoPlayerController.asset(
+        'assets/EjerciciosRecomenDableDuranteEmbarazo.mp4')
       // **When the controllers change, call setState() to rebuild widget.**
       ..addListener(() => setState(() {}))
       ..setLooping(true)

@@ -134,10 +134,10 @@ class ManageQuestions extends State<Questions> {
                   },
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.pregnant_woman_rounded),
-                    labelText: 'Ingresa tu duda',
-                  ),
+                      border: OutlineInputBorder(),
+                      icon: Icon(Icons.pregnant_woman_rounded),
+                      labelText: 'Ingresa tu duda',
+                      hintText: 'Recuerda los signos de interrogación'),
                   onChanged: (String valor) async {
                     _pregunta = valor;
                   }),
