@@ -16,6 +16,7 @@ class ManageTraining extends State<Training> {
         appBar: AppBar(
           actions: <Widget>[],
           leading: IconButton(
+            onPressed: () {},
             tooltip: 'Search',
             icon: Icon(Icons.sports_volleyball_outlined),
           ),
