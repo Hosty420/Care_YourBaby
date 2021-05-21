@@ -16,18 +16,18 @@ class ManageNutrition extends State<Nutrition> {
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.asset(
-        'assets/EjerciciosNoRecomenDableDuranteEmbarazo.mp4')
-      // **When the controllers change, call setState() to rebuild widget.**
-      ..addListener(() => setState(() {}))
-      ..setLooping(true)
-      ..initialize();
-    _specialistVideo = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
-      // **When the controllers change, call setState() to rebuild widget.**
-      ..addListener(() => setState(() {}))
-      ..setLooping(true)
-      ..initialize();
+    _videoController =
+        VideoPlayerController.asset('assets/riesgosComerCarneCruda.mp4')
+          // **When the controllers change, call setState() to rebuild widget.**
+          ..addListener(() => setState(() {}))
+          ..setLooping(true)
+          ..initialize();
+    _specialistVideo =
+        VideoPlayerController.asset('assets/alimentacionEmbarazo.mp4')
+          // **When the controllers change, call setState() to rebuild widget.**
+          ..addListener(() => setState(() {}))
+          ..setLooping(true)
+          ..initialize();
     _audioController = VideoPlayerController.network(
         'https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_700KB.mp3')
       ..addListener(() => setState(() {}))
