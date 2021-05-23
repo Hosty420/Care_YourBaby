@@ -30,7 +30,7 @@ class _ConvexAppExampleState extends State<ConvexAppExample> {
           TabItem(icon: Icons.question_answer, title: 'Preguntas'),
           TabItem(icon: Icons.sports_volleyball, title: 'Ejercicio'),
           TabItem(icon: Icons.food_bank_rounded, title: 'Nutrición'),
-          TabItem(icon: Icons.pregnant_woman_sharp, title: 'Tú'),
+          TabItem(icon: Icons.pregnant_woman_sharp, title: 'Cuidados'),
           TabItem(icon: Icons.calendar_today_sharp, title: 'Agenda')
         ],
         initialActiveIndex: selectedPage,

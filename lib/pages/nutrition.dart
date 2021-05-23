@@ -1,5 +1,3 @@
-import 'package:care_yourbaby/pages/home.dart';
-import 'package:care_yourbaby/pages/training.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -133,7 +131,7 @@ class ManageNutrition extends State<Nutrition> {
         child: Column(
           children: <Widget>[
             ListTile(
-              title: Text('¿CÓMO SACIAR LOS ANTOJOS DE MANERA SALUDABLE',
+              title: Text('¿CÓMO SACIAR LOS ANTOJOS DE MANERA SALUDABLE?',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               subtitle: Text(
