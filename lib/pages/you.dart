@@ -15,7 +15,7 @@ class ManageYou extends State<You> {
   void initState() {
     super.initState();
     _videoController =
-        VideoPlayerController.asset('assets/riesgosComerCarneCruda.mp4')
+        VideoPlayerController.asset('assets/cuidadosEmbarazo.mp4')
           // **When the controllers change, call setState() to rebuild widget.**
           ..addListener(() => setState(() {}))
           ..setLooping(true)
